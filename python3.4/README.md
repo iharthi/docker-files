@@ -9,5 +9,6 @@
 # Updating
 
 1. Update version in Makefile
-2. `make build`
-3. `make release`
+2. Update the Dockerfile
+3. `make build`
+4. `make release`

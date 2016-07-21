@@ -1,10 +1,10 @@
 .PHONY: release tag_latest build
 
 NAME = thorgate/debian-python3.4
-VERSION = 1.0.0
+VERSION = 1.1.0
 
 common:
-	cp -R ../common .
+	yes | cp -rf ../common .
 
 build: common
 	docker build -t $(NAME):$(VERSION) --rm .

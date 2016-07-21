@@ -21,6 +21,7 @@ RUN apt-get update \
     pkg-config \
     python3.4 \
     python3.4-dev \
+    libffi-dev \
     ssh \
     && apt-get autoremove \
     && apt-get clean
@@ -32,13 +33,21 @@ RUN pip3.4 install -U "setuptools"
 RUN pip3.4 install -U "pip"
 RUN pip3.4 install -U "virtualenv"
 
-# Set the locale
-RUN locale-gen en_US.UTF-8
+# Generate locales
+RUN locale-gen en_US.UTF-8 \
+               et_EE \
+               et_EE.UTF-8 \
+               ru_RU \
+               ru_RU.UTF-8
+
+# Set default locale
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 RUN dpkg-reconfigure -f noninteractive locales
+
+# add extra locales
 
 # install requirements
 RUN apt-get update
