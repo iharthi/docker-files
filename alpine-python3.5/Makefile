@@ -4,7 +4,7 @@ NAME = thorgate/alpine-python3.5
 VERSION = 1.1.0
 
 common:
-	yes | cp -rf ../common .
+	yes | cp -rf ../common ./.common
 
 build: common
 	docker build -t $(NAME):$(VERSION) --rm .

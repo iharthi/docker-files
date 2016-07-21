@@ -1,5 +1,5 @@
-# Should the build use fast or slow version
-FAST := n
+# Should the build rebuild everything or use cache
+FAST := y
 
 # Ensure the Makefile won't break if there are files with the same name as the goals here
 .PHONY: all help release-python3.4

@@ -72,6 +72,6 @@ RUN dpkg -i ttf-ubuntu-font-family*.deb
 RUN npm install -g phantomjs-prebuilt
 
 # Copy pip config
-COPY common/pip.conf /root/.config/pip/pip.conf
+COPY .common/pip.conf /root/.config/pip/pip.conf
 
 VOLUME /wheelhouse:/wheelhouse
