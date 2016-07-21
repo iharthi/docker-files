@@ -27,6 +27,7 @@ help:
 	@echo "$(C_BG)python3.4:$(C_OFF)                              Python3.4 on ubuntu 14.04"
 	@echo "$(C_BG)debian-python3.4:$(C_OFF)                       Python3.4 on debian jessie"
 	@echo "$(C_BG)python3.4:$(C_OFF)                              Python3.5 on alpine 3.4"
+	@echo "$(C_BG)postgres-9.4-et-ru:$(C_OFF)                     postgres:9.4 with extra locales"
 	@echo ""
 	@echo "Goals"
 	@echo "===================================================================================================="
@@ -37,8 +38,8 @@ help:
 	@echo "$(C_BG)make release-<container>$(C_OFF)                Build and publish <container>"
 
 
-build-all: build-python3.4 build-debian-python3.4 build-alpine-python3.5
-release-all: release-python3.4 release-debian-python3.4 release-alpine-python3.5
+build-all: build-python3.4 build-debian-python3.4 build-alpine-python3.5 build-postgres-9.4-et-ru
+release-all: release-python3.4 release-debian-python3.4 release-alpine-python3.5 build-postgres-9.4-et-ru
 
 
 release-python3.4:
@@ -61,7 +62,15 @@ release-alpine-python3.5:
 ifeq ($(FAST),y)
 	cd alpine-python3.5 && $(MAKE) release-fast
 else
-	cd debian-python3.4 && $(MAKE) release
+	cd alpine-python3.5 && $(MAKE) release
+endif
+
+
+release-postgres-9.4-et-ru:
+ifeq ($(FAST),y)
+	cd postgres-9.4-et-ru && $(MAKE) release-fast
+else
+	cd postgres-9.4-et-ru && $(MAKE) release
 endif
 
 
