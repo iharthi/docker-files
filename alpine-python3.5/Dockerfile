@@ -34,4 +34,4 @@ RUN \
 COPY .common/pip.conf /root/.config/pip/pip.conf
 
 # Use global wheelhouse /dir
-VOLUME /wheelhouse:/wheelhouse
+VOLUME /wheelhouse

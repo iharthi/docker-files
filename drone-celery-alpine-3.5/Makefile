@@ -1,7 +1,7 @@
 .PHONY: release tag_latest build
 
-NAME = thorgate/debian-python3.4
-VERSION = 1.1.1
+NAME = thorgate/drone-celery-alpine-3.5
+VERSION = 0.2.1
 
 common:
 	yes | cp -rf ../common ./.common

@@ -1,7 +1,7 @@
 .PHONY: release tag_latest build common
 
 NAME = thorgate/python3.4
-VERSION = 1.1.0
+VERSION = 1.1.1
 
 common:
 	yes | cp -rf ../common ./.common
