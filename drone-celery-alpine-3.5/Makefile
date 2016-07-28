@@ -1,4 +1,4 @@
-.PHONY: release tag_latest build
+.PHONY: release tag_latest build common
 
 NAME = thorgate/drone-celery-alpine-3.5
 VERSION = 0.2.1

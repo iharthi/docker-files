@@ -1,4 +1,4 @@
-.PHONY: release tag_latest build
+.PHONY: release tag_latest build common
 
 NAME = thorgate/postgres-9.4-et-ru
 VERSION = 1.0.0

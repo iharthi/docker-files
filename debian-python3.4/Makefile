@@ -1,4 +1,4 @@
-.PHONY: release tag_latest build
+.PHONY: release tag_latest build common
 
 NAME = thorgate/debian-python3.4
 VERSION = 1.1.1
