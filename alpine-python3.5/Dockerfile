@@ -4,7 +4,8 @@ FROM python:3.5-alpine
 MAINTAINER Thorgate, hi@thorgate.eu
 
 RUN \
-    echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "@edge-testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "@edge-community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add \
         alpine-sdk \
@@ -24,7 +25,8 @@ RUN \
         ttf-liberation \
         ttf-ubuntu-font-family \
         poppler-utils \
-        libzip-dev@testing \
+        libzip-dev@edge-community \
+        waitforit@edge-testing \
         nodejs-lts && \
     npm install -g phantomjs-prebuilt && \
     pip install --upgrade virtualenv pip
