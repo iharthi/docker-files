@@ -36,6 +36,10 @@ else
     touch "${CELERY_LOG_FILE}"
 fi
 
+if [ ! ${CELERY_PID_FILE} ]; then
+    CELERY_PID_FILE="/tmp/celeryd.pid"
+fi
+
 # Cd into the source dir
 echo "... entering dir ${SOURCE_DIR} ...";
 cd ${SOURCE_DIR};
@@ -62,24 +66,55 @@ if [ ${CELERY_INNER_DIR} ]; then
     cd ${CELERY_INNER_DIR};
 fi
 
-# If VENV_PATH is set use celery from bin dir
+# If VENV_PATH is set activate the virtualenv
 if [ ${VENV_PATH} ]; then
-    CELERY_BINARY="${VENV_PATH}/bin/celery"
-else
-    CELERY_BINARY="celery"
+    source ${VENV_PATH}/bin/activate
 fi
 
-# Start celery
-#  1. Set app to CELERY_APP`
-#  2. Log level is info
-#  3. Run beat inside celery worker
-#  4. Store pidfile in /tmp/
-#  5. Log into CELERY_LOG_FILE
-#  6. Redirect stdout and stderr to CELERY_LOG_FILE
-${CELERY_BINARY} worker \
-    --app=${CELERY_APP} \
-    --loglevel=INFO     \
-    -B                  \
-    --pidfile /tmp/celeryd.pid \
-    --logfile ${CELERY_LOG_FILE} \
-     >> ${CELERY_LOG_FILE} 2>&1
+nohup sh -c cd ${CELERY_INNER_DIR} && /celery-kill >> ${CELERY_LOG_FILE} 2>&1 &
+
+# If CELERY_COVERAGE is set run celery with coverage (note, this uses solo worker)
+if [ ${CELERY_COVERAGE} ]; then
+    # If COVERAGE_PARALLEL is set add --parallel-mode flag
+    if [ ${COVERAGE_PARALLEL} ]; then
+        COVERAGE_FLAGS="--parallel-mode -m"
+    else
+        COVERAGE_FLAGS="-m"
+    fi
+
+    # Start celery via coverage run
+    #  1. Set app to CELERY_APP`
+    #  2. Log level is info
+    #  3. Run beat inside celery worker
+    #  4. Store pidfile in /tmp/
+    #  5. Log into CELERY_LOG_FILE
+    #  6. set pooling to solo (see https://github.com/celery/celery/issues/3422)
+    #  7. Redirect stdout and stderr to CELERY_LOG_FILE
+    coverage run ${COVERAGE_FLAGS} \
+    celery worker \
+        --app=${CELERY_APP} \
+        --loglevel=INFO     \
+        -B                  \
+        --pidfile ${CELERY_PID_FILE} \
+        --logfile ${CELERY_LOG_FILE} \
+        -P solo \
+         >> ${CELERY_LOG_FILE} 2>&1
+else
+    # Start celery
+    #  1. Set app to CELERY_APP`
+    #  2. Log level is info
+    #  3. Run beat inside celery worker
+    #  4. Store pidfile in /tmp/
+    #  5. Log into CELERY_LOG_FILE
+    #  6. Redirect stdout and stderr to CELERY_LOG_FILE
+    celery worker \
+        --app=${CELERY_APP} \
+        --loglevel=INFO     \
+        -B                  \
+        --pidfile ${CELERY_PID_FILE} \
+        --logfile ${CELERY_LOG_FILE} \
+         >> ${CELERY_LOG_FILE} 2>&1
+fi
+
+ps fax
+ls -la ../

@@ -1,5 +1,5 @@
 NAME = thorgate/drone-celery-alpine-3.5
-VERSION = 1.2.0
+VERSION = 1.3.0
 
 # Configure make
 .PHONY: help common build tag_latest push release
