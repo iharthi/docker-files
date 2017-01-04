@@ -20,6 +20,9 @@ help:
 	@echo "$(C_BG)make tag_latest$(C_OFF)         Tag $(NAME):$(VERSION) as :latest"
 	@echo "$(C_BG)make push$(C_OFF)               Push $(NAME):$(VERSION) to docker registry"
 
+common:
+	yes | cp -rf ../common ./.common
+
 build: common
 ifdef REBUILD
 	@echo "REBUILDING $(NAME):$(VERSION)"
