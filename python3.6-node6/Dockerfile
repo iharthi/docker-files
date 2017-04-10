@@ -54,7 +54,9 @@ ENV LC_ALL en_US.UTF-8
 
 # install requirements
 RUN pip install --upgrade pip
-RUN pip install wheel
+RUN pip install --upgrade wheel
+RUN pip install --upgrade setuptools
+RUN pip install --upgrade virtualenv
 
 # Copy pip config
 RUN ls -la
