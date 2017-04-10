@@ -49,8 +49,11 @@ ENV LC_ALL en_US.UTF-8
 RUN apt-get update
 RUN apt-get install -y libzip-dev libxml2-dev libxslt1-dev curl
 RUN apt-get install -y libjpeg62 libjpeg62-turbo-dev zlib1g-dev
+
 RUN pip install --upgrade pip
-RUN pip install wheel
+RUN pip install --upgrade wheel
+RUN pip install --upgrade setuptools
+RUN pip install --upgrade virtualenv
 
 # Copy pip config
 RUN ls -la

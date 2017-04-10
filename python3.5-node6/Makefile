@@ -1,5 +1,5 @@
 NAME = thorgate/python3.5-node6
-VERSION = 1.0.0
+VERSION = 1.0.1
 
 # Configure make
 .PHONY: help common build tag_latest push release
