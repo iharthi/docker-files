@@ -1,6 +1,6 @@
 # Dockerfile for Docker-Eveli event listener
 
-FROM python:3.5.2-slim
+FROM python:3.5.3-slim
 
 MAINTAINER Thorgate, hi@thorgate.eu
 
