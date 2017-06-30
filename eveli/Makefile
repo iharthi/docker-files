@@ -1,5 +1,5 @@
 NAME = thorgate/eveli
-VERSION = 0.1
+VERSION = 0.2
 
 # Configure make
 .PHONY: help common build tag_latest push release

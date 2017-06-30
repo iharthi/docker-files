@@ -107,6 +107,7 @@ def listen():
     # Just in case, run the networks-fixer at startup as well
     ensure_networks(cli)
 
+    # Could use decorators to register the event handlers when we get more of them
     event_handlers = [handler_nginx_reload, handler_compose_networks]
 
     for event in cli.events():
